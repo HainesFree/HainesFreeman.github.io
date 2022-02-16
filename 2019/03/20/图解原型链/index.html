@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "ff5949f0"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目录   12345基本概念new操作符干了哪几件事instanceof内存图的角度看原型链总结">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解原型链">
+<meta property="og:url" content="http://yoursite.com/2019/03/20/图解原型链/index.html">
+<meta property="og:site_name" content="Haines Jiang">
+<meta property="og:description" content="目录   12345基本概念new操作符干了哪几件事instanceof内存图的角度看原型链总结">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://ipoodle.gitee.io/cdn/blog/prototype.png">
+<meta property="og:image" content="https://ipoodle.gitee.io/cdn/blog/prototype-process.png">
+<meta property="og:updated_time" content="2022-02-15T06:03:11.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图解原型链">
+<meta name="twitter:description" content="目录   12345基本概念new操作符干了哪几件事instanceof内存图的角度看原型链总结">
+<meta name="twitter:image" content="https://ipoodle.gitee.io/cdn/blog/prototype.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/20/图解原型链/">
+
+
+
+
+
+
+
+  <title>图解原型链 | Haines Jiang</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Haines Jiang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-时光机">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            时光机
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/图解原型链/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haines Jiang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2799323574,1027469776&fm=27&gp=0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haines Jiang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图解原型链</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-20T17:10:12+08:00">
+                2019-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基本概念</span><br><span class="line">new操作符干了哪几件事</span><br><span class="line">instanceof</span><br><span class="line">内存图的角度看原型链</span><br><span class="line">总结</span><br></pre></td></tr></table></figure>
+  <a id="more"></a>
+<p>  之前一直想整理下原型和原型链相关的知识点，无奈公司事情太忙，一直没有来得及整理，作为前端开发js基础的确很重要。<br>  自己也经常反思自身存在的知识盲点。本文从基本概念出发，再从内存图的角度来解释原型链查找的过程，觉得与口头表述原型链相比较而言，这样理解更为深刻，更有利于巩固自己的知识。</p>
+<h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1- 基本概念"></a>1- 基本概念</h4><ul>
+<li><p>原型对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">每一个函数都有prototype属性，它默认指向Object空对象（即称为原型对象）</span><br><span class="line">原型对象本身是一个普通对象，它具有constructor属性，指向其构造函数。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原型对象存在的原因：为实例对象共享公共的属性和方法，避免浪费内存</p>
+</li>
+<li><p>函数对象与实例对象的区别:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">函数对象可以加括号调用，形如fn();而实例对象不可以，</span><br><span class="line">但两者作为普通对象而言，都可以打点访问设置自身的属性。形如obj.name,fn.name</span><br><span class="line">函数对象具有的是&quot;prototype&quot;属性，而实例对象具有的是&quot;__prototype__&quot;属性</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显式原型对象和隐式原型对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可以简单的理解成函数对象的prototype属性指向的是显式原型对象，实例对象的__prototype__属性指向的是隐式原型对象</span><br><span class="line">两者指向的是同一个内存地址:Fun.prototype === fun.__prototype__（构造函数的显式原型对象===当前构造函数实例对象的隐式原型对象）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">任何一个函数都可以作为构造函数，只要被new了，就称为构造函数</span><br><span class="line">只要定义了构造函数，那么这个函数自动具有prototype属性，会初始化一个原型对象，原型对象具有constructor属性指向其构造函数。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实例对象:只要是对象，无论哪种方式生成，都叫实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var o1 = &#123;name:’o1’&#125;//Object&#123;name:’o1’&#125;</span><br><span class="line">var o11 = new Object( &#123;name:’o11’&#125;)//Object&#123;name:’o2’&#125;</span><br><span class="line"></span><br><span class="line">var M = function()&#123;this.name:’o2’&#125;</span><br><span class="line">var o2 = new M();//M&#123;name:’o3’&#125;</span><br><span class="line"></span><br><span class="line">var P = &#123;name:’o3’&#125;</span><br><span class="line">var o3 = Object.create(P)//Object&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>原型链：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">访问一个对象的属性时，先在自身属性中查找，找到返回</span><br><span class="line">如果没有, 再沿着__proto__这条链向上查找, 找到返回</span><br><span class="line">如果最终没找到, 返回undefined</span><br><span class="line">__proto__这条原型查找链就是原型链: 隐式原型链</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>作用域链和原型链：a.b，查找a的时候，a是变量，会沿着作用域链进行查找；查找b时，b是属性，会沿着原型链上面查找。</p>
+</li>
+</ul>
+<h4 id="2-new操作符干了哪几件事"><a href="#2-new操作符干了哪几件事" class="headerlink" title="2- new操作符干了哪几件事"></a>2- new操作符干了哪几件事</h4><ul>
+<li>一个新的空对象被创建，它继承了foo.prototype</li>
+<li>构造函数foo会被执行，同时this会指向这个新实例</li>
+<li>若构造函数返回一个对象，那么这个对象会取代new出来的结果。反之，为1空对象。</li>
+</ul>
+<h4 id="3-instanceof"><a href="#3-instanceof" class="headerlink" title="3- instanceof"></a>3- instanceof</h4><ul>
+<li>表达式: A instanceof B</li>
+<li>如果B函数的显式原型对象在A对象的原型链上, 返回true, 否则返回false</li>
+</ul>
+<h4 id="4-图解原型链"><a href="#4-图解原型链" class="headerlink" title="4- 图解原型链"></a>4- 图解原型链</h4><p>  <img src="https://ipoodle.gitee.io/cdn/blog/prototype.png" alt="blockchain" title=" 代码演示"><br>  <img src="https://ipoodle.gitee.io/cdn/blog/prototype-process.png" alt="blockchain" title=" 内存图的角度看原型链"><br>  1.代码中含有构造函数Object，Foo以及实例对象foo，它们都是对象，属于引用数据类型，在栈中分别储存了对应的指针，该指针实际上是指向对应堆内存的引用地址。<br>  2.foo.test1();foo堆内存中地址0x567，先从自身查找test1()方法，发现自身有，查找结束。<br>  3.foo.test2();foo堆内存中地址0x567，先从自身查找test2()方法，查找发现没有，会继续沿着原型链 <code>__prototype__</code>向上查找，但是<code>foo.__prototype__</code>指向哪里呢？由于<code>foo.__prototype__</code>===<code>Foo.prototype</code>，且<code>Foo.prototype</code>引用地址0x456,所以<code>foo.__prototype__</code>会指向0x456发现有，查找结束。<br>  4.同理，foo.toString();会从<code>foo.__prototype__.__prototype__</code>查找到Object对象上，toString()为其内置方法，查询结束。</p>
+<h4 id="5-总结"><a href="#5-总结" class="headerlink" title="5- 总结"></a>5- 总结</h4><p>  个人觉得原型对象，构造函数（即函数对象），实例对象，原型链这些概念首先要理解清楚，不能搞混了，然后想办法找到它们之间的内在联系，再想办法画下它们之间的关系图，加深理解和记忆。</p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/15/gzip/" rel="next" title="开启gzip压缩">
+                <i class="fa fa-chevron-left"></i> 开启gzip压缩
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/15/JS运行机制/" rel="prev" title="JavaScript执行机制">
+                JavaScript执行机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2799323574,1027469776&fm=27&gp=0.jpg" alt="Haines Jiang">
+            
+              <p class="site-author-name" itemprop="name">Haines Jiang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">1- 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-new操作符干了哪几件事"><span class="nav-number">1.0.2.</span> <span class="nav-text">2- new操作符干了哪几件事</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-instanceof"><span class="nav-number">1.0.3.</span> <span class="nav-text">3- instanceof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-图解原型链"><span class="nav-number">1.0.4.</span> <span class="nav-text">4- 图解原型链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-总结"><span class="nav-number">1.0.5.</span> <span class="nav-text">5- 总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Haines Jiang</span>
+
+  
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+本站访客数:<span id="busuanzi_value_site_uv">
+</span>
+</div>
+
+
+
+
+  <span class="post-meta-divider"></span>
+
+
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count"><i class="fa fa-pencil"></i> total: 11.3k words</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
