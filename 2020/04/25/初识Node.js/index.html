@@ -81,7 +81,7 @@
 
 
 
-  <meta name="keywords" content="Wechat,">
+  <meta name="keywords" content="Node,">
 
 
 
@@ -92,20 +92,18 @@
 
 
 
-<meta name="description" content="基于vue服务端渲染">
-<meta name="keywords" content="Wechat">
+<meta name="description" content="目录1234概念安装应用场景REPL">
+<meta name="keywords" content="Node">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微信开发">
-<meta property="og:url" content="http://yoursite.com/2018/07/29/微信开发/index.html">
+<meta property="og:title" content="初识Node.js">
+<meta property="og:url" content="http://yoursite.com/2020/04/25/初识Node.js/index.html">
 <meta property="og:site_name" content="Haines Jiang">
-<meta property="og:description" content="基于vue服务端渲染">
+<meta property="og:description" content="目录1234概念安装应用场景REPL">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://d301.paixin.com/thumbs/6842574/109122750/staff_1024.jpg?imageView2/2/w/700/h/700">
-<meta property="og:updated_time" content="2022-02-15T15:12:21.000Z">
+<meta property="og:updated_time" content="2022-02-26T16:47:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微信开发">
-<meta name="twitter:description" content="基于vue服务端渲染">
-<meta name="twitter:image" content="http://d301.paixin.com/thumbs/6842574/109122750/staff_1024.jpg?imageView2/2/w/700/h/700">
+<meta name="twitter:title" content="初识Node.js">
+<meta name="twitter:description" content="目录1234概念安装应用场景REPL">
 
 
 
@@ -135,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/29/微信开发/">
+  <link rel="canonical" href="http://yoursite.com/2020/04/25/初识Node.js/">
 
 
 
@@ -143,7 +141,7 @@
 
 
 
-  <title>微信开发 | Haines Jiang</title>
+  <title>初识Node.js | Haines Jiang</title>
   
 
 
@@ -270,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/微信开发/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/初识Node.js/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Haines Jiang">
@@ -287,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">微信开发</h1>
+          <h1 class="post-title" itemprop="name headline">初识Node.js</h1>
         
 
         <div class="post-meta">
@@ -299,8 +297,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-29T09:51:04+08:00">
-                2018-07-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-25T14:16:12+08:00">
+                2020-04-25
               </time>
             
 
@@ -337,65 +335,67 @@
       
 
       
-        <h2 id="基于vue服务端渲染"><a href="#基于vue服务端渲染" class="headerlink" title="基于vue服务端渲染"></a>基于vue服务端渲染</h2><p><img src="http://d301.paixin.com/thumbs/6842574/109122750/staff_1024.jpg?imageView2/2/w/700/h/700" alt="blockchain" title="微信开发+小程序"><br><a id="more"></a></p>
-<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><ul>
-<li>申请公众号及小程序，域名及备案解析</li>
-<li>服务器的配置</li>
-<li>nginx的反向代理配置</li>
-<li>mongodb数据库安装</li>
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">概念</span><br><span class="line">安装</span><br><span class="line">应用场景</span><br><span class="line">REPL</span><br></pre></td></tr></table></figure>
+  <a id="more"></a>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行时环境。</p>
+<p>以下问题可以帮助你理解Node.js概念：</p>
+<h3 id="什么是JavaScript运行环境？"><a href="#什么是JavaScript运行环境？" class="headerlink" title="什么是JavaScript运行环境？"></a>什么是JavaScript运行环境？</h3><ul>
+<li>客户端-浏览器</li>
+<li>服务端-Node</li>
 </ul>
-<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><ul>
-<li>公众号api解读及公众号申请认证</li>
-<li>公众号和小程序用户信息的统一</li>
+<h3 id="为什么需要JavaScript引擎？"><a href="#为什么需要JavaScript引擎？" class="headerlink" title="为什么需要JavaScript引擎？"></a>为什么需要JavaScript引擎？</h3><p>因为我们编写的JavaScript代码不能直接被识别。</p>
+<ul>
+<li>编写的JavaScript代码无论运行在浏览器还是Node，最终都是被CPU去执行</li>
+<li>但是CPU只认识机器语言，JavaScript代码需要转变为机器语言，才能被CPU执行</li>
+<li>JavaScript引擎就是帮我们将JavaScript代码翻译成CPU认识的机器语言</li>
 </ul>
-<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><ul>
-<li>webpack构建小程序</li>
-<li>基于vue的服务端渲染Nuxt框架使用</li>
-<li>koa后台</li>
+<h3 id="什么是V8引擎？"><a href="#什么是V8引擎？" class="headerlink" title="什么是V8引擎？"></a>什么是V8引擎？</h3><p>V8引擎属于JavaScript引擎中的一种，常见的JavaScript引擎有以下几种：</p>
+<ul>
+<li><p><strong>SpiderMonkey</strong>：Brendan Eich开发，也是第一款JavaScript引擎</p>
+</li>
+<li><p><strong>Chakra</strong>:微软开发，用于IE浏览器</p>
+</li>
+<li><p><strong>JavaScriptCore</strong>:apple公司开发，WebKit中的JavaScript引擎</p>
+</li>
+<li><p><strong>V8</strong>：Google开发，用于Chrome和Node.js</p>
+</li>
 </ul>
-<h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><ul>
-<li>构建开始</li>
-<li>mongose建模，实现access_token</li>
-<li>消息流的处理</li>
-<li>多媒体素材接口上传</li>
-<li>sdk接入权限，签名算法</li>
-<li>vue ssr实现微信js-sdk的权限接入</li>
+<h3 id="浏览器内核包含什么？"><a href="#浏览器内核包含什么？" class="headerlink" title="浏览器内核包含什么？"></a>浏览器内核包含什么？</h3><p>主要由两部分组成：</p>
+<ol>
+<li>渲染引擎-处理html、css并将其绘制到页面</li>
+<li>JS引擎-解析和执行js来实现网页的动态效果</li>
+</ol>
+<h3 id="浏览器内核和V8引擎有什么关系？"><a href="#浏览器内核和V8引擎有什么关系？" class="headerlink" title="浏览器内核和V8引擎有什么关系？"></a>浏览器内核和V8引擎有什么关系？</h3><p>V8引擎是浏览器内核组成的一部分</p>
+<h3 id="渲染引擎解析html过程中，遇到了js该怎么办？"><a href="#渲染引擎解析html过程中，遇到了js该怎么办？" class="headerlink" title="渲染引擎解析html过程中，遇到了js该怎么办？"></a>渲染引擎解析html过程中，遇到了js该怎么办？</h3><p>会停止解析html,而去执行js,那为什么这样呢？因为如果先执行完html的话，js可能会操作Dom改变其html结构，最终导致渲染引擎再去解析html</p>
+<h3 id="常见的浏览器内核有哪些？"><a href="#常见的浏览器内核有哪些？" class="headerlink" title="常见的浏览器内核有哪些？"></a>常见的浏览器内核有哪些？</h3><p><strong>Trident:</strong> 微软开发，IE浏览器</p>
+<p><strong>Webkit:</strong> 苹果公司开发，用于Safari， 之前Chrome也在用</p>
+<p><strong>Blink: </strong>谷歌开发，Webkit的一个分支，Chrome目前在用</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>官网下载安装傻瓜式操作：<a href="https://nodejs.org/en" target="_blank" rel="noopener">https://nodejs.org/en</a></p>
+</li>
+<li><p>下载安装成功后，终端运行：<code>node --version</code>，若显示版本号,则代表安装成功！</p>
+</li>
 </ul>
-<h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><ul>
-<li>主页开发</li>
-<li>个人账户页开发</li>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li>高级前端进阶必经之路</li>
+<li>市场招聘要求</li>
+<li>作为web服务器，提供服务接口</li>
+<li>前端开发的库都是基于Node包管理</li>
+<li>SSR</li>
+<li>Node中间层</li>
+<li>前端工程化-脚手架</li>
+<li>桌面应用-Electron</li>
+<li>自动化脚本工具</li>
 </ul>
-<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><ul>
-<li>爬取相关</li>
-<li>七牛云上传图片</li>
-<li>mongose实现相关</li>
+<h2 id="REPL"><a href="#REPL" class="headerlink" title="REPL"></a>REPL</h2><p>概念：</p>
+<ul>
+<li>Read - Eval - Print - loop 即：读取-求值-输出-循环</li>
+<li>REPL是一个简单的交互式的编程环境</li>
 </ul>
-<h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><ul>
-<li>koa路由</li>
-<li>路由控制器及api分层</li>
-<li>数据建模及增删改查</li>
-</ul>
-<h3 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h3><ul>
-<li>用户数据模型</li>
-<li>登录机制相关</li>
-</ul>
-<h3 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h3><ul>
-<li>vue支付接口的调用</li>
-<li>支付实现相关</li>
-<li>订单创建相关</li>
-<li>支付代码封装及后端订单管理实现</li>
-</ul>
-<h3 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h3><ul>
-<li>测试客户端支付功能</li>
-<li>代理环境集成及正式打包相关</li>
-</ul>
-<h3 id="第十一章"><a href="#第十一章" class="headerlink" title="第十一章"></a>第十一章</h3><ul>
-<li>集成第三方库</li>
-<li>小程序多页面相关</li>
-</ul>
-<h3 id="第十二章"><a href="#第十二章" class="headerlink" title="第十二章"></a>第十二章</h3><ul>
-<li>小程序实现支付</li>
-<li>小程序api接口实现</li>
+<p>使用方法：</p>
+<ul>
+<li>浏览器中直接f12检查，即可输入js代码调试运行</li>
+<li>终端中，输入node后回车，在输入js代码运行</li>
 </ul>
 
       
@@ -424,7 +424,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Wechat/" rel="tag"><i class="fa fa-tag"></i> Wechat</a>
+            <a href="/tags/Node/" rel="tag"><i class="fa fa-tag"></i> Node</a>
           
         </div>
       
@@ -437,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/03/CSS盒子模型/" rel="next" title="CSS盒子模型">
-                <i class="fa fa-chevron-left"></i> CSS盒子模型
+              <a href="/2019/03/20/图解原型链/" rel="next" title="图解原型链">
+                <i class="fa fa-chevron-left"></i> 图解原型链
               </a>
             
           </div>
@@ -447,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/01/mac搭建本地服务器/" rel="prev" title="mac搭建本地服务器">
-                mac搭建本地服务器 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/15/JS运行机制/" rel="prev" title="JavaScript执行机制">
+                JavaScript执行机制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -574,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于vue服务端渲染"><span class="nav-number">1.</span> <span class="nav-text">基于vue服务端渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一章"><span class="nav-number">1.1.</span> <span class="nav-text">第一章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二章"><span class="nav-number">1.2.</span> <span class="nav-text">第二章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三章"><span class="nav-number">1.3.</span> <span class="nav-text">第三章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四章"><span class="nav-number">1.4.</span> <span class="nav-text">第四章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五章"><span class="nav-number">1.5.</span> <span class="nav-text">第五章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六章"><span class="nav-number">1.6.</span> <span class="nav-text">第六章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七章"><span class="nav-number">1.7.</span> <span class="nav-text">第七章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第八章"><span class="nav-number">1.8.</span> <span class="nav-text">第八章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第九章"><span class="nav-number">1.9.</span> <span class="nav-text">第九章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十章"><span class="nav-number">1.10.</span> <span class="nav-text">第十章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十一章"><span class="nav-number">1.11.</span> <span class="nav-text">第十一章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十二章"><span class="nav-number">1.12.</span> <span class="nav-text">第十二章</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是JavaScript运行环境？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是JavaScript运行环境？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要JavaScript引擎？"><span class="nav-number">2.2.</span> <span class="nav-text">为什么需要JavaScript引擎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是V8引擎？"><span class="nav-number">2.3.</span> <span class="nav-text">什么是V8引擎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器内核包含什么？"><span class="nav-number">2.4.</span> <span class="nav-text">浏览器内核包含什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器内核和V8引擎有什么关系？"><span class="nav-number">2.5.</span> <span class="nav-text">浏览器内核和V8引擎有什么关系？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染引擎解析html过程中，遇到了js该怎么办？"><span class="nav-number">2.6.</span> <span class="nav-text">渲染引擎解析html过程中，遇到了js该怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的浏览器内核有哪些？"><span class="nav-number">2.7.</span> <span class="nav-text">常见的浏览器内核有哪些？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">4.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REPL"><span class="nav-number">5.</span> <span class="nav-text">REPL</span></a></li></ol></div>
             
 
           </div>
