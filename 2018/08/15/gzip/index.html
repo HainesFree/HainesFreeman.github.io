@@ -100,7 +100,11 @@
 <meta property="og:site_name" content="Haines Jiang">
 <meta property="og:description" content="目录 基础部分   1234前言含义与作用代码演示字段解释    说明：赶紧开启gzip压缩吧。">
 <meta property="og:locale" content="default">
+<<<<<<< HEAD
 <meta property="og:updated_time" content="2020-05-18T07:30:00.726Z">
+=======
+<meta property="og:updated_time" content="2022-02-28T08:37:33.931Z">
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开启gzip压缩">
 <meta name="twitter:description" content="目录 基础部分   1234前言含义与作用代码演示字段解释    说明：赶紧开启gzip压缩吧。">
@@ -176,7 +180,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">fed</p>
       
   </div>
 
@@ -341,7 +345,7 @@
 <h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1- 前言"></a>1- 前言</h4><p> 前端的性能优化是一个永不停歇的路程，优化的方式也不一而足，今天重点不在于介绍性能优化，而是介绍性能优化的其中一种方式，通过压缩来节省http请求的流量，实现过程中依赖http中header部分的两个字段，Accept-Encoding和Content-EnCoding（分别来自request的header和response的header）。</p>
 <h4 id="2-含义与作用"><a href="#2-含义与作用" class="headerlink" title="2- 含义与作用"></a>2- 含义与作用</h4><p> 为什么首先要讲这两个字段的含义呢？因为当你打开一个页面时，请求到了服务端，如果请求上没有这种编码的标识的话，服务端是不知道该不该压缩？使用哪种方式压缩的？所以request请求header里的Accept-Encoding就是用来告诉服务端客户端是支持哪些编码方式的，一般的值有gzip/compress/deflate/br等，可以多个，中间用逗号隔开。如：</p>
 <p>  <code>Accept-Encoding: gzip, deflate, br</code><br> 综上，Accept-Encoding用来标识客户端能够理解的内容编码方式。 Content-Encoding用来标识主体进行了何种方式的内容编码转换。</p>
-<h4 id="3-代码演示"><a href="#3-代码演示" class="headerlink" title="3- 代码演示"></a>3- 代码演示</h4> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">  gzip_min_length 1k;</span><br><span class="line">  gzip_buffers 4 16k;</span><br><span class="line">  #gzip_http_version 1.0;</span><br><span class="line">  gzip_comp_level 2;</span><br><span class="line">  gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">  gzip_vary off;</span><br><span class="line">  gzip_disable &quot;MSIE [1-6].&quot;;</span><br></pre></td></tr></table></figure>
+<h4 id="3-代码演示"><a href="#3-代码演示" class="headerlink" title="3- 代码演示"></a>3- 代码演示</h4> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">  gzip_min_length <span class="number">1</span>k;</span><br><span class="line">  gzip_buffers <span class="number">4</span> <span class="number">16</span>k;</span><br><span class="line">  #gzip_http_version 1.0;</span><br><span class="line">  gzip_comp_level <span class="number">2</span>;</span><br><span class="line">  gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">  gzip_vary off;</span><br><span class="line">  gzip_disable <span class="string">"MSIE [1-6]."</span>;</span><br></pre></td></tr></table></figure>
 <h4 id="4-字段解释"><a href="#4-字段解释" class="headerlink" title="4- 字段解释"></a>4- 字段解释</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># 开启压缩  </span><br><span class="line">gzip  on;   </span><br><span class="line"># 设置允许压缩的页面最小字节数，页面字节数从header头得content-length中进行获取。默认值是0，不管页面多大都压缩。建议设置成大于2k的字节数，小于2k可能会越压越大。  </span><br><span class="line">gzip_min_length 2k;  </span><br><span class="line"># 设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。 例如 4 4k 代表以4k为单位，按照原始数据大小以4k为单位的4倍申请内存。 4 8k 代表以8k为单位，按照原始数据大小以8k为单位的4倍申请内存。  </span><br><span class="line"># 如果没有设置，默认值是申请跟原始数据相同大小的内存空间去存储gzip压缩结果。  </span><br><span class="line">gzip_buffers 4 16k;  </span><br><span class="line">#压缩级别，1-10，数字越大压缩的越好，也越占用CPU时间  </span><br><span class="line">gzip_comp_level 5;  </span><br><span class="line"># 默认值: gzip_types text/html (默认不对js/css文件进行压缩)  </span><br><span class="line"># 压缩类型，匹配MIME类型进行压缩  </span><br><span class="line"># 不能用通配符 text/*  </span><br><span class="line"># (无论是否指定)text/html默认已经压缩   </span><br><span class="line"># 设置哪压缩种文本文件可参考 conf/mime.types  </span><br><span class="line">gzip_types text/plain application/x-javascript text/css application/xml;    </span><br><span class="line"># 值为1.0和1.1 代表是否压缩http协议1.0，选择1.0则1.0和1.1都可以压缩  </span><br><span class="line">gzip_http_version 1.0   </span><br><span class="line"># IE6及以下禁止压缩  </span><br><span class="line">gzip_disable &quot;MSIE [1-6]\.&quot;;   </span><br><span class="line"># 默认值：off  </span><br><span class="line"># Nginx作为反向代理的时候启用，开启或者关闭后端服务器返回的结果，匹配的前提是后端服务器必须要返回包含&quot;Via&quot;的 header头。  </span><br><span class="line"># off - 关闭所有的代理结果数据的压缩  </span><br><span class="line"># expired - 启用压缩，如果header头中包含 &quot;Expires&quot; 头信息  </span><br><span class="line"># no-cache - 启用压缩，如果header头中包含 &quot;Cache-Control:no-cache&quot; 头信息  </span><br><span class="line"># no-store - 启用压缩，如果header头中包含 &quot;Cache-Control:no-store&quot; 头信息  </span><br><span class="line"># private - 启用压缩，如果header头中包含 &quot;Cache-Control:private&quot; 头信息  </span><br><span class="line"># no_last_modified - 启用压缩,如果header头中不包含 &quot;Last-Modified&quot; 头信息  </span><br><span class="line"># no_etag - 启用压缩 ,如果header头中不包含 &quot;ETag&quot; 头信息  </span><br><span class="line"># auth - 启用压缩 , 如果header头中包含 &quot;Authorization&quot; 头信息  </span><br><span class="line"># any - 无条件启用压缩  </span><br><span class="line">gzip_proxied expired no-cache no-store private auth;  </span><br><span class="line"># 给CDN和代理服务器使用，针对相同url，可以根据头信息返回压缩和非压缩副本  </span><br><span class="line">gzip_vary on;</span><br></pre></td></tr></table></figure>
 
       
@@ -474,7 +478,11 @@
               
                 <a href="/archives">
               
+<<<<<<< HEAD
                   <span class="site-state-item-count">8</span>
+=======
+                  <span class="site-state-item-count">16</span>
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -487,7 +495,11 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
+<<<<<<< HEAD
                   <span class="site-state-item-count">5</span>
+=======
+                  <span class="site-state-item-count">9</span>
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -571,7 +583,11 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
+<<<<<<< HEAD
   <span class="post-count"><i class="fa fa-pencil"></i> total: 8.6k words</span>
+=======
+  <span class="post-count"><i class="fa fa-pencil"></i> total: 16.7k words</span>
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
 </div>
 
         

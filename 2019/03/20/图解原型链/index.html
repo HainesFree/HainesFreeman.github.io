@@ -102,7 +102,11 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://ipoodle.gitee.io/cdn/blog/prototype.png">
 <meta property="og:image" content="https://ipoodle.gitee.io/cdn/blog/prototype-process.png">
+<<<<<<< HEAD
 <meta property="og:updated_time" content="2020-08-05T03:27:29.809Z">
+=======
+<meta property="og:updated_time" content="2022-03-07T01:12:14.601Z">
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解原型链">
 <meta name="twitter:description" content="目录   12345基本概念new操作符干了哪几件事instanceof内存图的角度看原型链总结">
@@ -179,7 +183,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">fed</p>
       
   </div>
 
@@ -338,7 +342,7 @@
       
 
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基本概念</span><br><span class="line">new操作符干了哪几件事</span><br><span class="line">instanceof</span><br><span class="line">内存图的角度看原型链</span><br><span class="line">总结</span><br></pre></td></tr></table></figure>
+        <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基本概念</span><br><span class="line">new操作符干了哪几件事</span><br><span class="line">instanceof</span><br><span class="line">内存图的角度看原型链</span><br><span class="line">总结</span><br></pre></td></tr></table></figure>
   <a id="more"></a>
 <p>  之前一直想整理下原型和原型链相关的知识点，无奈公司事情太忙，一直没有来得及整理，作为前端开发js基础的确很重要。<br>  自己也经常反思自身存在的知识盲点。本文从基本概念出发，再从内存图的角度来解释原型链查找的过程，觉得与口头表述原型链相比较而言，这样理解更为深刻，更有利于巩固自己的知识。</p>
 <h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1- 基本概念"></a>1- 基本概念</h4><ul>
@@ -357,7 +361,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">任何一个函数都可以作为构造函数，只要被new了，就称为构造函数</span><br><span class="line">只要定义了构造函数，那么这个函数自动具有prototype属性，会初始化一个原型对象，原型对象具有constructor属性指向其构造函数。</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>实例对象:只要是对象，无论哪种方式生成，都叫实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var o1 = &#123;name:’o1’&#125;//Object&#123;name:’o1’&#125;</span><br><span class="line">var o11 = new Object( &#123;name:’o11’&#125;)//Object&#123;name:’o2’&#125;</span><br><span class="line"></span><br><span class="line">var M = function()&#123;this.name:’o2’&#125;</span><br><span class="line">var o2 = new M();//M&#123;name:’o3’&#125;</span><br><span class="line"></span><br><span class="line">var P = &#123;name:’o3’&#125;</span><br><span class="line">var o3 = Object.create(P)//Object&#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123;<span class="attr">name</span>:’o1’&#125;<span class="comment">//Object&#123;name:’o1’&#125;</span></span><br><span class="line"><span class="keyword">var</span> o11 = <span class="keyword">new</span> <span class="built_in">Object</span>( &#123;<span class="attr">name</span>:’o11’&#125;)<span class="comment">//Object&#123;name:’o2’&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> M = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.name:’o2’&#125;</span><br><span class="line"><span class="keyword">var</span> o2 = <span class="keyword">new</span> M();<span class="comment">//M&#123;name:’o3’&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> P = &#123;<span class="attr">name</span>:’o3’&#125;</span><br><span class="line"><span class="keyword">var</span> o3 = <span class="built_in">Object</span>.create(P)<span class="comment">//Object&#123;&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
@@ -428,8 +432,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/15/JS运行机制/" rel="prev" title="JavaScript执行机制">
-                JavaScript执行机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/25/初识Node.js/" rel="prev" title="初识Node.js">
+                初识Node.js <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -509,7 +513,11 @@
               
                 <a href="/archives">
               
+<<<<<<< HEAD
                   <span class="site-state-item-count">8</span>
+=======
+                  <span class="site-state-item-count">16</span>
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -522,7 +530,11 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
+<<<<<<< HEAD
                   <span class="site-state-item-count">5</span>
+=======
+                  <span class="site-state-item-count">9</span>
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -555,7 +567,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">1- 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-new操作符干了哪几件事"><span class="nav-number">1.0.2.</span> <span class="nav-text">2- new操作符干了哪几件事</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-instanceof"><span class="nav-number">1.0.3.</span> <span class="nav-text">3- instanceof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-图解原型链"><span class="nav-number">1.0.4.</span> <span class="nav-text">4- 图解原型链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-总结"><span class="nav-number">1.0.5.</span> <span class="nav-text">5- 总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">1- 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-new操作符干了哪几件事"><span class="nav-number">1.2.</span> <span class="nav-text">2- new操作符干了哪几件事</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-instanceof"><span class="nav-number">1.3.</span> <span class="nav-text">3- instanceof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-图解原型链"><span class="nav-number">1.4.</span> <span class="nav-text">4- 图解原型链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-总结"><span class="nav-number">1.5.</span> <span class="nav-text">5- 总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -606,7 +618,11 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
+<<<<<<< HEAD
   <span class="post-count"><i class="fa fa-pencil"></i> total: 8.6k words</span>
+=======
+  <span class="post-count"><i class="fa fa-pencil"></i> total: 16.7k words</span>
+>>>>>>> 861a8dda30cfaad70dbe9aeeade12d2cd8eced63
 </div>
 
         
