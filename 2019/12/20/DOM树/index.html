@@ -96,7 +96,7 @@
 <meta name="keywords" content="浏览器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DOM树">
-<meta property="og:url" content="http://yoursite.com/2019/12/20/DOM树/index.html">
+<meta property="og:url" content="http://ipoodle.site/2019/12/20/DOM树/index.html">
 <meta property="og:site_name" content="Haines Jiang">
 <meta property="og:description" content="目录12345前言什么是 DOMDOM 树如何生成JavaScript如何影响DOM树构建总结">
 <meta property="og:locale" content="default">
@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://ipoodle.gitee.io/cdn/blog/dom/token3.png">
 <meta property="og:image" content="http://ipoodle.gitee.io/cdn/blog/dom/token4.png">
 <meta property="og:image" content="http://ipoodle.gitee.io/cdn/blog/dom/dom-tree.png">
-<meta property="og:updated_time" content="2022-03-24T08:17:51.000Z">
+<meta property="og:updated_time" content="2022-11-17T11:06:50.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOM树">
 <meta name="twitter:description" content="目录12345前言什么是 DOMDOM 树如何生成JavaScript如何影响DOM树构建总结">
@@ -142,7 +142,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/20/DOM树/">
+  <link rel="canonical" href="http://ipoodle.site/2019/12/20/DOM树/">
 
 
 
@@ -277,12 +277,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/20/DOM树/">
+    <link itemprop="mainEntityOfPage" href="http://ipoodle.site/2019/12/20/DOM树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Haines Jiang">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2799323574,1027469776&fm=27&gp=0.jpg">
+      <meta itemprop="image" content="http://ipoodle.gitee.io/cdn/blog/cat.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -412,7 +412,7 @@
 <p>而 JavaScript 引擎在解析 JavaScript 之前，是不知道 JavaScript 是否操纵了 CSSOM 的，所以渲染引擎在遇到 JavaScript 脚本时，不管该脚本是否操纵了 CSSOM，都会执行 CSS 文件下载，解析操作，再执行 JavaScript 脚本。</p>
 <p>所以说 JavaScript 脚本是依赖样式表的，这又多了一个阻塞过程。</p>
 <p>通过上面的分析，我们知道了 JavaScript 会阻塞 DOM 生成，而样式文件又会阻塞 JavaScript 的执行，所以在实际的工程中需要重点关注 JavaScript 文件和样式表文件，使用不当会影响到页面性能的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，今天就讲到这里，下面我来总结下今天的内容。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以下是内容总结：</p>
 <p>首先我们介绍了 DOM 是如何生成的，然后又基于 DOM 的生成过程分析了 JavaScript 是如何影响到 DOM 生成的。因为 CSS 和 JavaScript 都会影响到 DOM 的生成，所以我们又介绍了一些加速生成 DOM 的方案，理解了这些，能让你更加深刻地理解如何去优化首次页面渲染。</p>
 <p>额外说明一下，渲染引擎还有一个安全检查模块叫 XSSAuditor，是用来检测词法安全的。在分词器解析出来 Token 之后，它会检测这些模块是否安全，比如是否引用了外部脚本，是否符合 CSP 规范，是否存在跨站点请求等。如果出现不符合规范的内容，XSSAuditor 会对该脚本或者下载任务进行拦截。</p>
 
@@ -533,7 +533,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2799323574,1027469776&fm=27&gp=0.jpg" alt="Haines Jiang">
+              <img class="site-author-image" itemprop="image" src="http://ipoodle.gitee.io/cdn/blog/cat.jpeg" alt="Haines Jiang">
             
               <p class="site-author-name" itemprop="name">Haines Jiang</p>
               <p class="site-description motion-element" itemprop="description"></p>
